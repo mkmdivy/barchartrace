@@ -1,0 +1,140 @@
+Country_ISO3,Year,Technology,Share
+ALB,2016,Other Energy Efficiency ,0.251256281
+AND,2019,Other Renewables,1
+AND,2017,Storage (not electromobility),1
+AND,2018,Storage (not electromobility),1
+ARG,2005,Wind,0.243902439
+ARG,2010,Wind,0.265017668
+ARG,2016,Wind,0.071811361
+ARG,2017,Wind,0.132321041
+ARG,2016,Solar,0.107181136
+ARG,2016,Solar,0.13397642
+ARG,2017,Solar,0.14461316
+ARG,2017,Solar,0.07230658
+ARG,1990,Other Renewables,0.52173913
+ARG,2018,Other Renewables,0.222222222
+ARG,2016,Other Renewables,0.053590568
+ARG,2016,Hydro,0.053590568
+ARG,2005,Bioenergy,0.06097561
+ARG,2010,Bioenergy,0.176678445
+ARG,2015,Bioenergy,0.166666667
+ARG,2016,Bioenergy,0.107181136
+ARG,2005,Bioenergy,0.06097561
+ARG,2018,Other Energy Efficiency ,0.444444444
+ARG,2018,Nuclear,0.222222222
+ARG,2019,Nuclear,0.429184549
+ARG,2005,Storage (not electromobility),0.06097561
+ARG,2010,Storage (not electromobility),0.058303887
+ARG,2016,Storage (not electromobility),0.13397642
+ARG,2017,Storage (not electromobility),0.18076645
+ARG,2019,Storage (not electromobility),0.570815451
+ARG,2005,Hydrogen and Fuel Cells,0.243902439
+ARG,2010,Hydrogen and Fuel Cells,0.058303887
+ARG,2016,Other Energy Efficiency ,0.026795284
+ARG,2017,Other Energy Efficiency ,0.07230658
+ARG,1990,Carbon Capture and Storage,0.130434783
+ARG,2000,Other Road Transport,0.666666667
+ARG,2005,Other Road Transport,0.243902439
+ARG,2010,Other Road Transport,0.176678445
+ARG,2017,Other Road Transport,0.03615329
+ARG,2018,Other Road Transport,0.111111111
+ARG,2015,Hybrid - Electric - Electromobility,0.333333333
+ARG,2016,Hybrid - Electric - Electromobility,0.142550911
+ARG,2000,Air - Rail - Marine,0.333333333
+ARG,2015,Air - Rail - Marine,0.166666667
+ARG,2016,Renewable Energy Integration in Buildings,0.062165059
+ARG,2017,Renewable Energy Integration in Buildings,0.10845987
+ARG,1990,Building Energy Efficiency,0.173913043
+ARG,2010,Building Energy Efficiency,0.176678445
+ARG,2016,Building Energy Efficiency,0.107181136
+ARG,2017,Building Energy Efficiency,0.03615329
+ARM,2015,Wind,0.222222222
+ARM,2019,Wind,0.5
+ARM,2015,Solar,0.222222222
+ARM,2005,Solar,1
+ARM,2010,Solar,0.5
+ARM,2015,Solar,0.333333333
+ARM,2016,Solar,1
+ARM,2017,Solar,0.5
+ARM,2018,Solar,1
+ARM,2015,Storage (not electromobility),0.111111111
+ARM,2017,Hydrogen and Fuel Cells,0.5
+ARM,2019,Other Energy Efficiency ,0.5
+ARM,2015,Hybrid - Electric - Electromobility,0.111111111
+ARM,2010,Building Energy Efficiency,0.5
+ARE,2000,Wind,0.25
+ARE,2010,Wind,0.090909091
+ARE,2015,Wind,0.142857143
+ARE,2017,Wind,0.05899705
+ARE,2018,Wind,0.085106383
+ARE,2010,Solar,0.090909091
+ARE,2015,Solar,0.071428571
+ARE,2017,Solar,0.039528024
+ARE,2019,Solar,0.230946882
+ARE,2005,Solar,0.307692308
+ARE,2010,Solar,0.181818182
+ARE,2015,Solar,0.214285714
+ARE,2016,Solar,0.071428571
+ARE,2017,Solar,0.128023599
+ARE,2018,Solar,0.127659574
+ARE,2000,Other Renewables,0.25
+ARE,2016,Bioenergy,0.142857143
+ARE,2019,Bioenergy,0.230946882
+ARE,2017,Other Energy Efficiency ,0.088495575
+ARE,2017,Grid,0.05899705
+ARE,2018,Grid,0.085106383
+ARE,2000,Storage (not electromobility),0.25
+ARE,2010,Storage (not electromobility),0.151818182
+ARE,2016,Storage (not electromobility),0.285714286
+ARE,2017,Storage (not electromobility),0.17699115
+ARE,2018,Storage (not electromobility),0.170212766
+ARE,2019,Storage (not electromobility),0.404157044
+ARE,2010,Hydrogen and Fuel Cells,0.03
+ARE,2019,Hydrogen and Fuel Cells,0.057736721
+ARE,2000,Other Energy Efficiency ,0.25
+ARE,2010,Other Energy Efficiency ,0.090909091
+ARE,2017,Other Energy Efficiency ,0.05899705
+ARE,2018,Other Energy Efficiency ,0.085106383
+ARE,2010,Carbon Capture and Storage,0.045454545
+ARE,2015,Carbon Capture and Storage,0.071428571
+ARE,2016,Carbon Capture and Storage,0.071428571
+ARE,2010,Renewable Energy Integration in Buildings,0.090909091
+ARE,2015,Renewable Energy Integration in Buildings,0.071428571
+ARE,2018,Renewable Energy Integration in Buildings,0.042553191
+ARE,2015,Building Energy Efficiency,0.035714286
+ARE,2017,Building Energy Efficiency,0.05899705
+ARE,2018,Building Energy Efficiency,0.085106383
+ARE,2016,Other Road Transport,0.142857143
+ARE,2017,Other Road Transport,0.029498525
+ARE,2010,Air - Rail - Marine,0.045454545
+ARE,2015,Air - Rail - Marine,0.285714286
+ARE,2017,Air - Rail - Marine,0.01179941
+ARE,2018,Air - Rail - Marine,0.212765957
+ARE,2010,Hybrid - Electric - Electromobility,0.090909091
+ARE,2015,Hybrid - Electric - Electromobility,0.035714286
+ARE,2016,Hybrid - Electric - Electromobility,0.142857143
+ARE,2017,Hybrid - Electric - Electromobility,0.1179941
+ARE,2019,Hybrid - Electric - Electromobility,0.076212471
+ARE,2010,Air - Rail - Marine,0.090909091
+ARG,2010,Industry Energy Efficiency or substitution,0.088339223
+ARE,2017,Industry Energy Efficiency or substitution,0.019469027
+ARG,1990,Industry Energy Efficiency or substitution,0.173913043
+ARG,2015,Industry Energy Efficiency or substitution,0.333333333
+ARG,2017,Industry Energy Efficiency or substitution,0.14461316
+ARE,2017,Industry Energy Efficiency or substitution,0.05899705
+ARE,2015,Industry Energy Efficiency or substitution,0.071428571
+ARE,2016,Industry Energy Efficiency or substitution,0.142857143
+ARE,2017,Industry Energy Efficiency or substitution,0.019469027
+ARE,2017,Grid,0.05899705
+ARE,2018,Grid,0.085106383
+ALB,2015,Other Energy Efficiency ,1
+ALB,2016,Other Energy Efficiency ,0.748743719
+ALB,2017,Other Energy Efficiency ,1
+ALB,2018,Other Energy Efficiency ,1
+ARE,2017,Other Energy Efficiency ,0.014749263
+ARE,2018,Other Energy Efficiency ,0.021276596
+ARG,2005,Other Energy Efficiency ,0.085365854
+ARG,2017,Other Energy Efficiency ,0.07230658
+AND,2015,Other Energy Efficiency ,1
+AND,2016,Other Energy Efficiency ,1
+ARE,2005,Industry Energy Efficiency or substitution,0.692307692

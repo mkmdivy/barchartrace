@@ -1,9 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, forwardRef } from 'react';
 import Select, { components } from 'react-select'
 import './index.css';
 import data from './data.json';
-import optionsvariable from './optionvariable.json';
-import options from './option.json';
+import renewablevariable from './renewablevariable.json';
+import patentsvariable from './patentsvariable.json';
+import startupvariable from './startupvariable.json';
+import googlevariable from './googlevariable.json';
+import optionsall from './option.json';
 // import wordlist from './wordlist.json';
 import classes from './Site.module.css';
 import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton} from 'react-share';
@@ -12,23 +15,158 @@ import { FacebookShareButton, FacebookIcon, TwitterIcon, TwitterShareButton} fro
 // import StackGrid from "react-stack-grid";
 // import { Web, Videocam, Description, PictureAsPdf} from '@material-ui/icons';
 // import ReactGA from 'react-ga';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import queryString from "query-string";
 import { useLocation, useParams, useHistory } from 'react-router';
 import { useCurrentPng } from "recharts-to-png";
 import FileSaver from "file-saver";
-import { map } from 'd3';
-
-
-
-
+import patents1 from './patents1.json'
+import startup1 from './startup1.json'
+import startup2 from './startup2.json'
+import startup3 from './startup3.json'
+import startup4 from './startup4.json'
+import startup5 from './startup5.json'
+import startup6 from './startup6.json'
+import startup7 from './startup7.json'
+import startup8 from './startup8.json'
+import startup9 from './startup9.json'
+import startup10 from './startup10.json'
+import startup11 from './startup11.json'
+import startup12 from './startup12.json'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const App = props => {
 
+  
+  const variablelist = {"renewable1":"variable","renewable2":"variable","renewable3":"variable","patents1":"Technology","patents2":"Technology","startup1":"sector","startup2":"sector","startup3":"sector","startup4":"technology_field","startup5":"sector","startup6":"sector","startup7":"sector","startup8":"technology_field","google1":"technology"}
+  const valuelist = {"renewable1":"share of res in demand","renewable2":"share of res in demand","renewable3":"share of res in demand","patents1":"Value","patents2":"Share","startup1":"number_of_companies","startup2":"number_of_companies","startup3":"number_of_companies","startup4":"number_of_companies","startup5":"raised_amount_usd","startup6":"raised_amount_usd","startup7":"raised_amount_usd","startup8":"raised_amount_usd","google1":"value"}
 
-const location = useLocation()
-const history = useHistory()
-const [getPng, { ref, isLoading }] = useCurrentPng();
+  const [selectedOption, setSelectedOption] = useState([{value: 'AUS', label: 'Australia'}]);
+  const [selectedOptionvar, setSelectedOptionvar] = useState({value: 'startup1', label: 'Energy'});
+  const [selectedType, setSelectedType] = useState('startup');
+  
+  ////////////// Date set
+  
+  const date=new Date();
+  const priorDate = new Date(new Date().setDate(date.getDate() - 90));
+  // myPastDate.setDate(myPastDate.getDate() - 8);
+
+  const [dateRange, setDateRange] = useState([priorDate,date]);
+  console.log(date.getDate())
+  const [startDate, endDate] = dateRange;
+
+  const location = useLocation()
+  const history = useHistory()
+  const [getPng, { ref, isLoading }] = useCurrentPng();
+  // let optionsvariable = []
+  const optionsvariable = selectedType === "renewable"? renewablevariable : selectedType ==="patents"? patentsvariable : selectedType ==="startup"? startupvariable : googlevariable
+  
+  const queryoption =[]
+
+  const queryparse = location.search===""?  "AUS" : queryString.parse(location.search).country 
+  typeof queryparse==='string'? queryoption.push({value:queryparse,label:queryparse}) : queryparse.map(e => queryoption.push({value:e,label:e}))  
+  const queryparsevar = location.search===""?  'startup1' : queryString.parse(location.search).type
+  const queryoptionvar ={value:queryparsevar,label:optionsvariable.map(e=>e.value===queryparsevar? e.label : null)}
+
+  
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className={classes.buttonActivedownload2} onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ));
+
+
+///////////////////////
+
+// patents1.filter['Country_ISO3']
+// patents1
+// const selecteddb = startup1
+// const selectedVariable="sector"
+// const selectedValue="number_of_companies"
+
+
+
+const selecteddb = queryoptionvar.value==="patents1"? patents1 : queryoptionvar.value==="startup1"? startup1 : queryoptionvar.value==="startup2"? startup2 : queryoptionvar.value==="startup3"? startup3 : queryoptionvar.value==="startup4"? startup4 :queryoptionvar.value==="startup5"? startup5 :queryoptionvar.value==="startup6"? startup6 :queryoptionvar.value==="startup7"? startup7 :queryoptionvar.value==="startup8"? startup8 : queryoptionvar.value==="startup9"? startup9 : queryoptionvar.value==="startup10"? startup10 : queryoptionvar.value==="startup11"? startup11 : startup12
+const selectedVariable=variablelist[queryoptionvar.value]
+const selectedValue=valuelist[queryoptionvar.value]
+
+
+
+const sCountries = []
+selecteddb.map(e => sCountries.push(e.Country_ISO3))
+const options = optionsall.filter(e => sCountries.includes(e.value))
+
+const filteredData = selecteddb.filter(e => e.Country_ISO3 === queryparse)
+
+
+const selectedData = []
+let keylists = []
+filteredData.map(e => selectedData.some(f => f["Year"] == e.Year)? null : selectedData.push({"Year":e.Year,"Label":e.Year}))
+filteredData.map(e => keylists.push(e[selectedVariable]))
+filteredData.map(d => selectedData.map(e => e.Year === d.Year? e[d[selectedVariable]] = d[selectedValue] : null ))
+keylists = [...new Set(keylists)]
+
+console.log(selectedData)
+
+
+  const data = [
+    {
+      month: '2015.01',
+      a: 4000,
+      b: 2400,
+      c: 2400,
+    },
+    {
+      month: '2015.02',
+      a: 3000,
+      b: 1398,
+      c: 2210,
+    },
+    {
+      month: '2015.03',
+      a: 2000,
+      b: 9800,
+      c: 2290,
+    },
+    {
+      month: '2015.04',
+      a: 2780,
+      b: 3908,
+      c: 2000,
+    },
+    {
+      month: '2015.05',
+      a: 1890,
+      b: 4800,
+      c: 2181,
+    },
+    {
+      month: '2015.06',
+      a: 2390,
+      b: 3800,
+      c: 2500,
+    },
+    {
+      month: '2015.07',
+      a: 3490,
+      b: 4300,
+      c: 2100,
+    },
+  ];
+  
+  const toPercent = (decimal, fixed = 0) => `${(decimal * 100).toFixed(fixed)}%`;
+  
+  const getPercent = (value, total) => {
+    const ratio = total > 0 ? value / total : 0;
+  
+    return toPercent(ratio, 2);
+  };
+  
+
+///////////////////////////////
+
+
 
 const handleDownload = useCallback(async () => {
   const png = await getPng();
@@ -39,15 +177,6 @@ const handleDownload = useCallback(async () => {
   }
 }, [getPng]);
 
-const queryoption =[]
-
-
-const queryparse = location.search===""?  "Africa 2000-2020" : queryString.parse(location.search).country 
-typeof queryparse==='string'? queryoption.push({value:queryparse,label:queryparse}) : queryparse.map(e => queryoption.push({value:e,label:e}))  
-const queryparsevar = location.search===""?  'hv108' : queryString.parse(location.search).type
-
-
-const queryoptionvar ={value:queryparsevar,label:optionsvariable.map(e=>e.value===queryparsevar? e.label : null)}
 
 const locale = "en"
 
@@ -59,22 +188,20 @@ const colorBasket = [
   "rgb(67,107,101)",
   "rgb(133,163,147)",    
   "rgb(197,209,191)",
-  "rgb(246,186,112)",
-  "rgb(42,79,95)",  
-  "rgb(67,107,101)",
-  "rgb(133,163,147)",    
-  "rgb(197,209,191)",
-  "rgb(246,186,112)",
-  "rgb(42,79,95)",  
-  "rgb(67,107,101)",
-  "rgb(133,163,147)",    
-  "rgb(197,209,191)",
+  "#F2DFD7",  
+  "#d4c1ec",
+  "#9f9fed",    
+  "#736ced",
+  "#bdc667",
+  "#77966d",  
+  "#626d58",
+  "#544343",    
+  "#56282d",
   ];  
 
 
-const [selectedOption, setSelectedOption] = useState([{value: 'Angola', label: 'Angola'}]);
-const [selectedOptionvar, setSelectedOptionvar] = useState({value: 'hv108', label: 'Education completed in single years'});
-const [selectedType, setSelectedType] = useState('all');
+
+// let varlist = selectedType === 'patents'? {"label":"haha","value":"hoho"} : null
 
 const disableList = {
   "hv108":["Malawi 2012","Madagascar 2011","Madagascar 2013","Angola 2011","Madagascar 2016","Burkina Faso 2014","Angola 2006","Burkina Faso 2017","Malawi 2014","Uganda 2009","Malawi 2017","Ghana 2019","Mali 2010","Liberia 2009","Mali 2015","Liberia 2016","Mozambique 2018","Uganda 2014","Rwanda 2008","Kenya 2015","Senegal 2008","Uganda 2018","Sierra Leone 2016","Liberia 2011","Tanzania 2017","Ghana 2016","Togo 2017"],	
@@ -91,8 +218,7 @@ const disableList = {
   "Education":["Malawi 2012","Madagascar 2011","Madagascar 2013","Angola 2011","Madagascar 2016","Burkina Faso 2017","Angola 2006","Malawi 2014","Malawi 2017","Ghana 2016","Mali 2010","Kenya 2015","Mali 2015","Liberia 2011","Mozambique 2018","Uganda 2018","Rwanda 2008","Uganda 2014","Senegal 2008","Liberia 2009","Sierra Leone 2016","Burkina Faso 2014","Tanzania 2017","Liberia 2016","Togo 2017","Ghana 2019","Uganda 2009"]
 }
 
-console.log(disableList["hv108"])
-options.map(e => disableList[selectedOptionvar.value].includes(e.value)? e.isDisabled=true : e.isDisabled=false)
+// options.map(e => disableList[selectedOptionvar.value].includes(e.value)? e.isDisabled=true : e.isDisabled=false)
 
 
 
@@ -102,60 +228,6 @@ const countrylist = []
 queryoption.map(d=>countrylist.push(d.value))
 
 
-
-const filteredData = data.filter(d => countrylist.includes(d.EN) && d.type === selectedType)
-const selectedData = [
-  {category:0,label:'Rural', samplesize:0, citysize:0},
-  {category:10,label:'10 000 - 50 000', samplesize:0, citysize:0},
-  {category:50,label:'50 000 - 250 000', samplesize:0, citysize:0},
-  {category:250,label:'250 000 - 1 000 000', samplesize:0, citysize:0},
-  {category:1000,label:'1 000 000+', samplesize:0, citysize:0},
-]
-
-const eduGroup = ["no education","incomplete primary","complete primary","incomplete secondary","complete secondary","higher"]
-let SelectedVariable = selectedOptionvar.value
-filteredData.map(d=>
-  selectedData.map(e => 
-    selectedOptionvar.value==="Education"?
-      eduGroup.map(f => 
-        e.category === d.category?               
-        selectedType === 'all' ? 
-          e[d.EN+f]=d[f] :
-          selectedType === 'sex'? 
-            d.hv219 === 'male'? 
-              e[d.EN+"_male"+f]=d[f] :  
-            e[d.EN+"_female"+f]=d[f] :         
-            d.AgeCategory === 0? 
-              e[d.EN+"_young"+f]=d[f] : 
-              e[d.EN+"_old"+f]=d[f] :
-      null                     
-        ) :
-    e.category === d.category?       
-      selectedType === 'all' ? 
-        e[d.EN]=d[SelectedVariable] :
-        selectedType === 'sex'? 
-          d.hv219 === 'male'? 
-            e[d.EN+"_male"]=d[SelectedVariable] :  
-          e[d.EN+"_female"]=d[SelectedVariable] :         
-          d.AgeCategory === 0? 
-            e[d.EN+"_young"]=d[SelectedVariable] : 
-            e[d.EN+"_old"]=d[SelectedVariable] :
-    null 
-  
-    )
-  )
-filteredData.map(d=>
-  selectedData.map(e =>       
-    e.category === d.category?    
-    e["samplesize"] = e["samplesize"]+d.NumberofInd : null   
-    )
-  )
-filteredData.map(d=>
-  selectedData.map(e =>       
-    e.category === d.category?    
-    e["citysize"] = e["citysize"]+d.Numberofcities : null   
-    )
-  )
 
   
 
@@ -247,9 +319,6 @@ const IndicatorsContainer = props => {
     </div>
   )
 }
-
-
-
 
 
 const renderTooltip = (props) => {
@@ -347,63 +416,45 @@ const styleVar = {
 };
 
 let renderLineChart = (
-  <ResponsiveContainer height="100%" ref={ref}>
-      <BarChart 
-      // width={1000}
-      // height={600}
-      data={selectedData}
-      margin={{top: 10, right: 20, left: 20, bottom: 10}}
-      >
+  <ResponsiveContainer height="100%" ref={ref}>     
+        <AreaChart
+          width={500}
+          height={400}
+          data={selectedData}
+          stackOffset="expand"
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+        >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="label" />
-          {selectedOptionvar.value==="Education"? <YAxis domain={[0,1.05]} /> : <YAxis /> }
-          <Tooltip
-              cursor={{ strokeWidth: 0 }}
-              content={renderTooltip}      
-              language={locale} />
-          {selectedOptionvar.value==="Education"? null : <Legend />   }
-          
-          {countrylist.map((d,e) => 
-            selectedOptionvar.value==="Education"?                         
-              selectedType === 'all'?
-              eduGroup.map((f,g) => <Bar dataKey={d+f} stackId='a' fill={colorBasket[g]} />) :
-              selectedType === 'sex'?            
-              eduGroup.map((f,g) => <Bar dataKey={d+'_male'+f} stackId='a' fill={colorBasket[g]} />) : 
-              eduGroup.map((f,g) => <Bar dataKey={d+'_young'+f} stackId='a' fill={colorBasket[g]} />) :
-            selectedType === 'all'?
-            <Bar dataKey={d} fill={colorBasket[e]}/> :
-            selectedType === 'sex'?            
-            <Bar dataKey={d+'_male'} fill={colorBasket[e]}/> :
-            <Bar dataKey={d+'_young'} fill={colorBasket[e]}/>
-          )}     
-          {countrylist.map((d,e) => 
-            selectedOptionvar.value==="Education"?                         
-              selectedType === 'all'?
-              null :
-              selectedType === 'sex'?            
-              eduGroup.map((f,g) => <Bar dataKey={d+'_female'+f} stackId='b' fill={colorBasket[g]} />) : 
-              eduGroup.map((f,g) => <Bar dataKey={d+'_old'+f} stackId='b' fill={colorBasket[g]} />) :
-            selectedType === 'all'?
-            null :
-            selectedType === 'sex'?            
-            <Bar dataKey={d+'_female'} fill={colorBasket[e+1]}/>                        
-            :
-            <Bar dataKey={d+'_old'} fill={colorBasket[e+1]}/>
-          )}                
-      </BarChart>
+          <XAxis dataKey="Year" />
+          <YAxis tickFormatter={toPercent} />
+          {/* <Legend/> */}
+          <Tooltip/>          
+          {keylists.map((e,f) => 
+            <Area type="monotone" dataKey={e} stackId="1" stroke={colorBasket[f]} fill={colorBasket[f]} />  
+            )}
+          {/* <Area type="monotone" dataKey="All technologies (total patents)" stackId="1" stroke="#8884d8" fill="#8884d8" /> */}
+          {/* <Area type="monotone" dataKey="b" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+          <Area type="monotone" dataKey="c" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
+        </AreaChart>
   </ResponsiveContainer>
 );
 
 let buttonGroup = (
   <div className={classes.buttonGroup}>
     <div className={classes.datagroup}>
-      <button className={selectedType === 'all'? classes.buttonActive : classes.button} onClick={() => handleChangeType('all',setSelectedType,history,queryparse,queryparsevar)}>All</button>
-      <button className={selectedType === 'sex'? classes.buttonActive : classes.button} onClick={() => handleChangeType('sex',setSelectedType,history,queryparse,queryparsevar)}>Male/Female</button>
-      <button className={selectedType === 'age'? classes.buttonActive : classes.button} onClick={() => handleChangeType('age',setSelectedType,history,queryparse,queryparsevar)}>Young/Old</button>
+      <button className={selectedType === 'renewable'? classes.buttonActive : classes.button} onClick={() => handleChangeType('renewable',setSelectedType,history,queryparse,queryparsevar)}>Renewable energy</button>
+      <button className={selectedType === 'patents'? classes.buttonActive : classes.button} onClick={() => handleChangeType('patents',setSelectedType,history,queryparse,queryparsevar)}>Patents</button>
+      <button className={selectedType === 'startup'? classes.buttonActive : classes.button} onClick={() => handleChangeType('startup',setSelectedType,history,queryparse,queryparsevar)}>Start-ups</button>
+      <button className={selectedType === 'google'? classes.buttonActive : classes.button} onClick={() => handleChangeType('google',setSelectedType,history,queryparse,queryparsevar)}>Google Trends</button>
     </div>
-    <div className={classes.socialgroup}>
+    {/* <div className={classes.socialgroup}>
       <TwitterShareButton
-        url={"https://mkmdivy.github.io/pacdigitalstory/"+location.search}
+        url={"https://mkmdivy.github.io/barchartrace/"+location.search}
         title={"The Economic Power of Africa's cities \n" + selectedOptionvar.label + ":" + queryparse.toString() + "\n" + "Explore more here:"}
         className="Demo__some-network__share-button">
         <TwitterIcon
@@ -413,7 +464,7 @@ let buttonGroup = (
            />
       </TwitterShareButton>
       <FacebookShareButton
-      url={"https://mkmdivy.github.io/pacdigitalstory/"+location.search}
+      url={"https://mkmdivy.github.io/barchartrace/"+location.search}
       title="The Economic Power of Africa's cities"
       className="Demo__some-network__share-button">
       <FacebookIcon 
@@ -423,18 +474,9 @@ let buttonGroup = (
       />
       </FacebookShareButton>      
       <i className={classes.download} onClick={handleDownload}>
-        <i className={classes["download-icon"]}> get_app </i>
-        {/* {isLoading ? 'Downloading...' : 'Download Chart'} */}
-      </i>
-      {/* <a className={classes.fullstory}      
-          href="https://oecd.org/africa-urbanisation"
-          target='_blank'
-          rel="noopener"
-          aria-label='Github'
-        >        
-          Explore the<br/> full story
-      </a>     */}
-    </div>
+        <i className={classes["download-icon"]}> get_app </i>      
+      </i>      
+    </div> */}
 </div>
 );
 
@@ -442,7 +484,9 @@ let buttonGroup = (
 // );
 
   
-return (
+return (  
+<div class={classes.topmenu}>
+{buttonGroup}      
 <div class={classes.Layout}>
   <div class={classes.Mixer}>
     <div className={classes.Large}>
@@ -462,7 +506,7 @@ return (
         components={{
           Control: () => null
         }}
-        />                
+        />                        
       </div>      
       <div className={classes.Sm_Md}>
       Mobile view
@@ -484,9 +528,22 @@ return (
             IndicatorsContainer: IndicatorsContainer
           }}
           
-          />      
-      </div>
-      
+          />                
+      </div>      
+      <DatePicker
+      selectsRange={true}
+      startDate={startDate}
+      endDate={endDate}
+      customInput={<ExampleCustomInput />}
+      onChange={(update) => {
+        setDateRange(update);
+      }}
+      dateFormat="MM/yyyy"
+      showMonthYearPicker
+      showFullMonthYearPicker
+      showTwoColumnMonthYearPicker
+      withPortal
+    />
       <div className={classes.Sm_Md}>        
         <Select 
           className={classes.KeyFigures}
@@ -499,37 +556,11 @@ return (
           isClearable={false}
           />                
       </div>      
-      {buttonGroup}
-      <div className={classes.textgroup}>
-      <br/>Respondents who live in different city size
-      </div>
-      <div className={classes.Control}>
-      {separator(selectedData.reduce((e,f) => e + f.samplesize,0))} individuals from {selectedData.slice(1,5).reduce((e,f) => e + f.citysize,0)} cities.&nbsp;
-      <div className={classes.ControlInfoS}>
-       <span className={classes.span}>More detail</span>
-        <i className={classes["material-icons"]}> info </i>
-        <div className={classes.InfoTooltipS}>
-            Number of individuals used to calculate the indicator <br/>
-            Rural: { separator(selectedData[0].samplesize) } <br/>
-            10 000 - 50 000: { separator(selectedData[1].samplesize) } <br/>
-            50 000 - 250 000: { separator(selectedData[2].samplesize) } <br/>
-            250 000 - 1M: { separator(selectedData[3].samplesize) } <br/>
-            1M+: { separator(selectedData[4].samplesize) } <br/> 
-            <br/> Number of cities used to calculate the indicator <br/>
-            10 000 - 50 000: { separator(selectedData[1].citysize) } <br/>
-            50 000 - 250 000: { separator(selectedData[2].citysize) } <br/>
-            250 000 - 1M: { separator(selectedData[3].citysize) } <br/>
-            1M+: { separator(selectedData[4].citysize) } <br/>
-            </div>
-          </div>      
-        </div>
     </div>
     <div className={classes.LineGraph}>
     {renderLineChart}
-
-    </div>
-    Please note that not all the indicators are available for every country and years. Unavailable countries and years are shaded in grey. By selecting "Africa", the latest data from available countries are displayed.
-    <div className={classes.socialgroupSM}>
+    </div>    
+    {/* <div className={classes.socialgroupSM}>
       <TwitterShareButton
         url={"https://mkmdivy.github.io/pacdigitalstory/"+location.search}
         title={"The Economic Power of Africa's cities \n" + selectedOptionvar.label + ":" + queryparse.toString() + "\n" + "Explore more here:"}
@@ -552,18 +583,15 @@ return (
       </FacebookShareButton>      
       <i className={classes.download} onClick={handleDownload}>
         <i className={classes["download-icon"]}> get_app </i>
-        {/* {isLoading ? 'Downloading...' : 'Download Chart'} */}
       </i>
-      {/* <a className={classes.fullstory}      
-          href="https://oecd.org/africa-urbanisation"
-          target='_blank'
-          rel="noopener"
-          aria-label='Github'
-        >        
-          Explore the<br/> full story
-      </a>     */}
+    </div> */}
+    <div className={classes.downloadbuttons}>
+    <button className={classes.buttonActivedownload} onClick={handleDownload}>Download chart image</button>    
+    <button className={classes.buttonActivedownload}>Download chart data</button>
+    <button className={classes.buttonActivedownload2}>Get the full dataset</button>
     </div>
-  </div>
+  </div>  
+</div>
 </div>
   );
 };
@@ -574,9 +602,8 @@ function handleChange(e, d, history, selectedOptionvar, setSelectedOption ,query
   if (e) {
     if (e.length === 0 ) {
       return;
-    } else {
-        console.log(selectedOptionvar)
-        if(selectedType !== 'all' || selectedOptionvar.value === 'Education' ){e=[e[e.length-1]]}
+    } else {              
+        e=[e[e.length-1]]
         const newCountries = e.map(d => d.value);       
         // pushQuery(history, { country: newCountries });
         history.push({
@@ -593,7 +620,7 @@ function handleChangevar(e, d, history, setSelectedOptionvar,queryparse) {
   } else {
     console.log(queryparse)    
     let newcon = queryparse
-    if(e.value === 'Education' ){newcon = typeof(queryparse)==="string"? queryparse : [queryparse[queryparse.length-1]]}    
+    newcon = typeof(queryparse)==="string"? queryparse : [queryparse[queryparse.length-1]]
     setSelectedOptionvar(e)
     console.log(newcon)
     history.push({
@@ -609,7 +636,7 @@ function handleChangeType(e,setSelectedType, history,queryparse,queryparsevar) {
   setSelectedType(e)
 history.push({
   pathname: history.pathname,
-  search: queryString.stringify({country:newcountry,type:queryparsevar,class:e})  
+  search: queryString.stringify({country:newcountry,type:queryparsevar,database:e})  
 })
 }
 

@@ -1,0 +1,8 @@
+[
+  { "label": "Number of start-ups", "options":[{"value":"startup1","label":"Energy"},{"value":"startup2","label":"Energy and Digital"},{"value":"startup3","label":"Energy and Green"},{"value":"startup4","label":"By technology"}]},
+  { "label": "Fundings", "options":[{"value":"startup5","label":"Energy"},{"value":"startup6","label":"Energy and Digital"},{"value":"startup7","label":"Energy and Green"},{"value":"startup8","label":"By technology"}]},
+  { "label": "Success rates", "options":[{"value":"startup9","label":"Energy"},{"value":"startup10","label":"Energy and Digital"},{"value":"startup11","label":"Energy and Green"},{"value":"startup12","label":"By technology"}]}
+  
+  
+]
+

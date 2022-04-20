@@ -1,0 +1,41 @@
+Country_ISO3,Year,Technology,Value
+ABW,2000,All technologies (total patents),0.5
+ABW,2015,All technologies (total patents),0.5
+ABW,2016,All technologies (total patents),3
+ABW,2018,All technologies (total patents),0.2
+ABW,2019,All technologies (total patents),0.33
+AFG,2000,All technologies (total patents),0.58
+AFG,2005,All technologies (total patents),0.25
+AFG,2016,All technologies (total patents),1
+AFG,2018,All technologies (total patents),0.5
+AGO,2005,All technologies (total patents),1.33
+AGO,2010,All technologies (total patents),0.5
+AGO,2016,All technologies (total patents),1.5
+AGO,2017,All technologies (total patents),0.5
+AGO,2018,All technologies (total patents),0.5
+ALB,1990,All technologies (total patents),0.5
+ALB,2005,All technologies (total patents),5.08
+ALB,2010,All technologies (total patents),3.17
+ALB,2015,All technologies (total patents),12.77
+ALB,2015,Other Energy Efficiency ,2.53
+ALB,2016,All technologies (total patents),17.8
+ALB,2016,Other Energy Efficiency ,3.98
+ALB,2017,All technologies (total patents),16.75
+ALB,2017,Other Energy Efficiency ,4.12
+ALB,2018,All technologies (total patents),10.2
+ALB,2018,Other Energy Efficiency ,2.92
+ALB,2019,All technologies (total patents),2.25
+AND,1990,All technologies (total patents),4
+AND,2000,All technologies (total patents),3
+AND,2005,All technologies (total patents),3.5
+AND,2010,All technologies (total patents),2.5
+AND,2015,All technologies (total patents),5.03
+AND,2015,Other Energy Efficiency ,0.2
+AND,2016,All technologies (total patents),4.5
+AND,2016,Other Energy Efficiency ,0.5
+AND,2017,All technologies (total patents),6.08
+AND,2017,Storage (not electromobility),1
+AND,2018,All technologies (total patents),4.33
+AND,2018,Storage (not electromobility),1
+AND,2019,All technologies (total patents),6.83
+AND,2019,Other Renewables,0.33

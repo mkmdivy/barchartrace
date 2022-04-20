@@ -1,3 +1,15 @@
+.topmenu{  
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.downloadbuttons {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
 .KeyFiguresWrapper {
   display: flex;
   justify-content: flex-start; 
@@ -507,6 +519,35 @@ margin:auto;
    margin-bottom: 10px;
  }
 
+ .buttonActivedownload {
+  font: 600 15px Arial;
+  color: white;
+  border: none;
+  padding: 4px 16px;
+  text-align: center;
+  display: inline-block;
+  letter-spacing: .7px;
+  cursor: pointer;
+  transition: all .19s linear;
+  background-color: #a70000;
+  outline: none;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+.buttonActivedownload2 {
+  font: 600 15px Arial;
+  color: black;  
+  padding: 4px 16px;
+  text-align: center;
+  display: inline-block;
+  letter-spacing: .7px;
+  cursor: pointer;
+  transition: all .19s linear;
+  background-color: #ffffff;  
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
 
 
 
